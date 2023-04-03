@@ -16,7 +16,7 @@ export default function App() {
       <Pressable title='Get Started' style={styles.button}  >
         <Text style={{ fontSize: 17, fontWeight: 400 }}> Get Started</Text>
       </Pressable>
-      <Text>Updated by Aaradhaya chutiya</Text>
+      <Text>Updated by Aaradhaya khandelwal</Text>
       <StatusBar style="auto" />
       <Text>Order delicious food from here</Text>
     </SafeAreaView>
