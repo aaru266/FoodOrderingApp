@@ -1,44 +1,24 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, Image, SafeAreaView, View, Pressable, Platform } from 'react-native';
-import chefImg from './assets/chef.jpg'
+import { StyleSheet, SafeAreaView, Text } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Welcome from './screens/Welcome';
+import Home from './screens/Home';
+
 export default function App() {
+  const Stack = createNativeStackNavigator()
   return (
-    <SafeAreaView style={styles.container}>
-      <StatusBar
-        backgroundColor='tomato'
+    <NavigationContainer>
 
-      />
-
-      <Image source={chefImg} style={{ width: 400, height: 500 }} />
-      <View style={{ padding: 20 }}>
-
-        <Text style={{ fontSize: 30, fontWeight: 'bold', textAlign: "center" }}>The Fastest in Delivery <Text style={{ color: "orange" }}>Food</Text></Text>
-
-      </View>
-      <View>
-        <Text style={{ marginTop: 15, fontSize: 20, color: "rgba(0,189,0,0.9)" }}>Giving your Hunger a new Option</Text>
-      </View>
-      <Pressable title='Get Started' style={styles.button}  >
-        <Text style={{ fontSize: 20, fontWeight: 600, color: '#fff' }}> Get Started</Text>
-      </Pressable>
-      <Text>Updated by Aryan Nama</Text>
-
-    </SafeAreaView>
+      <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="Welcome">
+        <Stack.Screen name='Welcome' component={Welcome} />
+        <Stack.Screen name="Home" component={Home} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    paddingTop: 10
-  },
-  button: {
-    backgroundColor: "tomato",
-    borderRadius: 50,
-    marginTop: 20,
-    padding: 20,
-    paddingHorizontal: 50,
-  },
+
 
 });
