@@ -1,8 +1,7 @@
 import React from 'react'
-import { StyleSheet, Text, Image, SafeAreaView, View, Pressable, Platform, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, Image, View, Pressable, Platform, TouchableOpacity } from 'react-native';
 import chefImg from '../assets/chef.jpg'
-import { StatusBar } from 'expo-status-bar';
-
+import { SafeAreaView } from 'react-native-safe-area-context';
 const Welcome = ({ navigation }) => {
     return (
         <SafeAreaView style={styles.container}>
@@ -28,7 +27,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        // paddingTop: 25
     },
 
     button: {
