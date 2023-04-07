@@ -14,7 +14,7 @@ const Welcome = ({ navigation }) => {
             <View>
                 <Text style={{ marginTop: 15, fontSize: 20, color: "rgba(0,189,0,0.9)" }}>Giving your Hunger a new Option</Text>
             </View>
-            <TouchableOpacity style={styles.button} activeOpacity={0.7} onPress={() => navigation.navigate('Home')} >
+            <TouchableOpacity style={styles.button} activeOpacity={0.7} onPress={() => navigation.navigate('Login')} >
                 <Text style={styles.btntext}>Get started</Text>
             </TouchableOpacity>
         </SafeAreaView>
