@@ -1,22 +1,22 @@
-import { StyleSheet, Text, View,TextInput } from 'react-native'
+import { StyleSheet, Text, View, TextInput } from 'react-native'
 import React from 'react'
-import { Icon } from 'react-native-vector-icons/FontAwesome'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { Ionicons } from '@expo/vector-icons';
 
 const Home = () => {
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.header}>
-            <View style={{width:250,justifyContent:'flex-start',alignItems:'flex-start'}}>
-            <Text style={{fontSize:30,fontWeight:600}}>Find your favourite food</Text>
+                <View style={{ width: 220, justifyContent: 'flex-start', alignItems: 'flex-start' }}>
+                    <Text style={{ fontSize: 30, fontWeight: 700 }}>Find your Favourite food</Text>
+                </View>
+                <View>
+                    <Ionicons name="notifications-outline" size={24} color="black" />
+                </View>
             </View>
-            <View>
-             <Text >aaa</Text>
-            </View>
-            </View>
-            <View style={styles.searchcontainer}>
-                <TextInput style={{borderWidth:1,padding:10,borderRadius:50}} placeholder='Search'/>
-                
+            <View style={styles.searchContainer}>
+                <TextInput style={{ borderWidth: 1, padding: 10, borderRadius: 50, paddingRight: 50 }} placeholder='Search' />
+                <Ionicons name='search' size={24} style={{ position: "absolute", right: 15, top: 12, }} />
             </View>
         </SafeAreaView>
     )
@@ -27,15 +27,16 @@ export default Home
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingHorizontal:10
+        paddingHorizontal: 10,
     },
-    header:{
-        marginTop:30,
-        flexDirection:'row',
-        justifyContent:'space-around',
-        alignItems:'flex-start'
+    header: {
+        marginTop: 20,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: "center",
+        paddingHorizontal: 10,
     },
-    searchcontainer:{
-         marginVertical:20
+    searchContainer: {
+        marginVertical: 20,
     }
 })
