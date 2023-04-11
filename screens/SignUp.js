@@ -9,8 +9,8 @@ const SignUp = () => {
             <TextInput style={styles.input} placeholder='Name' />
             <TextInput style={styles.input} placeholder='Email' inputMode='email' />
             <TextInput style={styles.input} placeholder='Password' secureTextEntry={true} />
-            <TouchableOpacity>
-                <Text>
+            <TouchableOpacity style={styles.button}>
+                <Text style={{ color: 'white', fontSize: 20 }}>
                     Sign Up
                 </Text>
             </TouchableOpacity>
@@ -36,5 +36,12 @@ const styles = StyleSheet.create({
         width: 250,
         marginVertical: 5,
         borderRadius: 5,
+    },
+    button: {
+        paddingHorizontal: 20,
+        paddingVertical: 10,
+        borderRadius: 10,
+        backgroundColor: 'black',
+        marginTop: 20
     }
 })
