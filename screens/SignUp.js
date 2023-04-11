@@ -2,7 +2,7 @@ import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-nativ
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
-const SignUp = () => {
+const SignUp = ({ navigation }) => {
     return (
         <SafeAreaView style={styles.container}>
             <Text style={{ fontSize: 30, fontWeight: 500, marginVertical: 20 }} >Sign Up</Text>
@@ -14,7 +14,14 @@ const SignUp = () => {
                     Sign Up
                 </Text>
             </TouchableOpacity>
-
+            <View style={styles.signupLink}>
+                <Text style={{ fontSize: 18, fontWeight: 500 }}>
+                    Already Registered?
+                </Text>
+                <TouchableOpacity activeOpacity={0.9} onPress={() => navigation.navigate('Login')}>
+                    <Text style={{ fontSize: 18, color: 'blue' }}>Login here</Text>
+                </TouchableOpacity>
+            </View>
 
         </SafeAreaView>
     )
@@ -43,5 +50,10 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         backgroundColor: 'black',
         marginTop: 20
+    },
+    signupLink: {
+        flexDirection: 'row',
+        marginVertical: 15,
+        gap: 5,
     }
 })
