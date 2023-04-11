@@ -17,7 +17,7 @@ const Login = ({navigation}) => {
                 <Text style={{fontSize:18,fontWeight:500}}>
                     New User?
                 </Text>
-                <TouchableOpacity activeOpacity={0.9} onPress={()=>navigation.navigate('SignUp')}>
+                <TouchableOpacity activeOpacity={0.9} onPress={()=>navigation.navigate('Home')}>
                     <Text style={{fontSize:18,color:'blue'}}>Create Account</Text>
                 </TouchableOpacity>
             </View>
