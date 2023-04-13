@@ -10,7 +10,7 @@ const Home = () => {
         <SafeAreaView style={styles.container}>
             <View style={styles.header}>
                 <View style={{ width: 220, justifyContent: 'flex-start', alignItems: 'flex-start' }}>
-                    <Text style={{ fontSize: 30, fontWeight: 700 }}>Find your Favourite food</Text>
+                    <Text style={{ fontSize: 30, fontWeight: 700, color:'coral'}}>All you need is love and Food!!</Text>
                 </View>
                 <View>
                     <Ionicons name="notifications-outline" size={24} color="black" />
