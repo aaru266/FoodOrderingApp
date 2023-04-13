@@ -5,6 +5,7 @@ import Welcome from './screens/Welcome';
 import Home from './screens/Home';
 import Login from './screens/Login';
 import SignUp from './screens/SignUp';
+import TabNavigation from './navigation/TabNavigation';
 
 export default function App() {
   const Stack = createNativeStackNavigator()
@@ -12,7 +13,7 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="Welcome">
         <Stack.Screen name='Welcome' component={Welcome} />
-        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="Navigation" component={TabNavigation} />
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="SignUp" component={SignUp} />
         
