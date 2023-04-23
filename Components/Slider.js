@@ -6,7 +6,7 @@ const Slider = () => {
   return (
     <ImageSlider 
     data={[
-        {img: require('../assets/homepage/burger.jpg')   },
+        {img: require('../assets/homepage/burger.jpg')},
         {img:require('../assets/homepage/icecream.jpeg')},
         {img:require('../assets/homepage/samosa.jpg')},
         {img:require('../assets/homepage/sweets.jpg')}

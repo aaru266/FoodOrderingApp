@@ -3,6 +3,8 @@ import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Ionicons } from '@expo/vector-icons';
 import Slider from '../Components/Slider';
+import { FlatList } from 'react-native';
+import Categories from '../Components/Categories';
 
 
 const Home = () => {
@@ -21,6 +23,7 @@ const Home = () => {
                 <Ionicons name='search' size={24} style={{ position: "absolute", right: 15, top: 12, }} />
             </View>
             <Slider/>
+            <Categories/>
         </SafeAreaView>
     )
 }
