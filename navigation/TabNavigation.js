@@ -3,6 +3,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import React from 'react'
 import Home from '../screens/Home';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons';
+import Profile from '../screens/Profile';
 
 const TabNavigation = () => {
     const Tab = createBottomTabNavigator();
@@ -12,7 +14,14 @@ const TabNavigation = () => {
             <Tab.Screen name='Home' component={Home} options={{
                 tabBarLabel: 'Home',
                 tabBarIcon: ({ color, size }) => (
-                    <MaterialCommunityIcons name="home" color={color} size={size} />
+                    <MaterialCommunityIcons name="home" color='black' size={24} />
+                ),
+            }} />
+
+            <Tab.Screen name='Profile' component={Profile} options={{
+                tabBarLabel: 'Profile',
+                tabBarIcon: ({ color, size }) => (
+                    <FontAwesome name="user" color='black' size={24} />
                 ),
             }} />
         </Tab.Navigator>
