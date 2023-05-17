@@ -3,9 +3,10 @@
     "name": "FoodOrderingApp",
     "slug": "FoodOrderingApp",
     "version": "1.0.0",
+    "plugins": ["@react-native-google-signin/google-signin"],
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "scheme":"FoodOrderingApp",
+    "scheme":"com.OrderFood.FoodOrderingApp",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
@@ -19,11 +20,12 @@
       "supportsTablet": true
     },
     "android": {
+      "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.foodorder.FoodOrderingApp"
+      "package": "com.OrderFood.FoodOrderingApp"
     },
     "web": {
       "favicon": "./assets/favicon.png"

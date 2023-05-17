@@ -1,14 +1,13 @@
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
-import { auth, provider } from '../firebase';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { FirebaseAuth, provider } from '../firebase';
 import { Alert } from 'react-native';
-import * as WebBrowser from "expo-web-browser";
-import * as Google from "expo-auth-session/providers/google";
 import { useDispatch } from 'react-redux';
 import { setUser } from '../app/features/UserSlice';
-
+import { GoogleSignin, GoogleSigninButton, } from '@react-native-google-signin/google-signin';
+import auth from '@react-native-firebase/auth';
 
 const Login = ({ navigation }) => {
     const [email, setEmail] = useState('');
@@ -17,49 +16,35 @@ const Login = ({ navigation }) => {
     const dispatch = useDispatch()
 
     const handleLogin = () => {
-        signInWithEmailAndPassword(auth, email, password).then(userCred => {
+        signInWithEmailAndPassword(FirebaseAuth, email, password).then(userCred => {
             const user = userCred.user
             dispatch(setUser(user))
-            console.log(user)
         }).catch(err => {
             Alert.alert(err.message)
         })
     }
 
-    WebBrowser.maybeCompleteAuthSession();
-
-
-    const [token, setToken] = useState("");
-    const [userInfo, setUserInfo] = useState(null);
-
-    const [request, response, promptAsync] = Google.useAuthRequest({
-        expoClientId: '941304859403-uqpigf55pa4rkdchrkn8lod86aaspt4s.apps.googleusercontent.com',
-        androidClientId: "941304859403-89ar2vck38gr3tgc2boushifm88rhl2e.apps.googleusercontent.com",
+    GoogleSignin.configure({
+        webClientId: '824077864903-k887t214a0ssr8vs2ql5fkiiaeu7oeat.apps.googleusercontent.com',
     });
-    useEffect(() => {
-        if (response?.type === "success") {
-            setToken(response.authentication.accessToken);
-            getUserInfo();
-            console.log(userInfo);
-        }
-    }, [response, token, dispatch]);
 
-    const getUserInfo = async () => {
-        try {
-            const response = await fetch(
-                "https://www.googleapis.com/userinfo/v2/me",
-                {
-                    headers: { Authorization: `Bearer ${token}` },
-                }
-            );
+    const onGoogleButtonPress = async () => {
+        // await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
+        const { idToken } = await GoogleSignin.signIn();
 
-            const user = await response.json();
-            // console.log(user)
+        const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+
+        const user = auth().signInWithCredential(googleCredential);
+        user.then(res => {
+            console.log("hello")
             dispatch(setUser(user))
-        } catch (error) {
-            alert(error.message)
-        }
-    };
+            console.log(res)
+        }).catch(err => {
+            console.log("errrorrrrrrrrrrrr")
+            console.log(err)
+        })
+    }
+
 
 
     return (
@@ -73,13 +58,11 @@ const Login = ({ navigation }) => {
                 </Text>
             </TouchableOpacity>
 
-            <View style={styles.loginIcon}>
-                <TouchableOpacity activeOpacity={0.8} onPress={() => {
-                    promptAsync();
-                }} >
-                    <Image source={require('../assets/google.png')} style={{ width: 50, height: 50, borderRadius: 50 }} />
-                </TouchableOpacity>
+            <View>
+                <GoogleSigninButton onPress={() => onGoogleButtonPress()} />
+
             </View>
+
 
             <View style={styles.signupLink}>
                 <Text style={{ fontSize: 18, fontWeight: 500 }}>
@@ -125,7 +108,4 @@ const styles = StyleSheet.create({
         marginVertical: 15,
         gap: 5,
     },
-    loginIcon: {
-        marginVertical: 10
-    }
 })

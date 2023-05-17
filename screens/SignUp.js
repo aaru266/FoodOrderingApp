@@ -2,9 +2,7 @@ import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-nativ
 import React, { useState, useEffect } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
-import { auth } from '../firebase'
-import * as WebBrowser from "expo-web-browser";
-import * as Google from "expo-auth-session/providers/google";
+import { FirebaseAuth } from '../firebase'
 import { useDispatch } from 'react-redux'
 import { setUser } from '../app/features/UserSlice'
 
@@ -15,7 +13,7 @@ const SignUp = ({ navigation }) => {
     const dispatch = useDispatch()
 
     const handleSignUp = () => {
-        createUserWithEmailAndPassword(auth, email, password)
+        createUserWithEmailAndPassword(FirebaseAuth, email, password)
             .then((userCredential) => {
                 const user = userCredential.user;
                 dispatch(setUser(user))
@@ -28,39 +26,7 @@ const SignUp = ({ navigation }) => {
             });
     }
 
-    WebBrowser.maybeCompleteAuthSession();
 
-
-    const [token, setToken] = useState("");
-    const [userInfo, setUserInfo] = useState(null);
-
-    const [request, response, promptAsync] = Google.useAuthRequest({
-        expoClientId: '508590517991-3t0sen59fsiu6mj5cj32kq5c80k4oc0g.apps.googleusercontent.com',
-        androidClientId: "508590517991-pfn0350lu5b4jlashjdlqsqhp7dpbgv2.apps.googleusercontent.com",
-
-    });
-    useEffect(() => {
-        if (response?.type === "success") {
-            setToken(response.authentication.accessToken);
-            getUserInfo();
-        }
-    }, [response, token]);
-
-    const getUserInfo = async () => {
-        try {
-            const response = await fetch(
-                "https://www.googleapis.com/userinfo/v2/me",
-                {
-                    headers: { Authorization: `Bearer ${token}` },
-                }
-            );
-
-            const user = await response.json();
-            setUserInfo(user);
-        } catch (error) {
-            alert(error.message)
-        }
-    };
 
     return (
         <SafeAreaView style={styles.container}>
