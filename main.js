@@ -11,9 +11,10 @@ const main = () => {
         console.log(user)
         setUser(user);
     }
+
     useEffect(() => {
         const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
-        return subscriber; // unsubscribe on unmount
+        return subscriber;
     }, []);
 
     if (!user) return <AuthenticateStack />

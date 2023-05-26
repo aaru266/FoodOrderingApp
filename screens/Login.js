@@ -16,12 +16,19 @@ const Login = ({ navigation }) => {
     const dispatch = useDispatch()
 
     const handleLogin = () => {
-        signInWithEmailAndPassword(FirebaseAuth, email, password).then(userCred => {
-            const user = userCred.user
-            dispatch(setUser(user))
-        }).catch(err => {
-            Alert.alert(err.message)
-        })
+        auth()
+            .signInWithEmailAndPassword(email, password)
+            .then(() => {
+                console.log('signed in!');
+            })
+            .catch(error => {
+
+                if (error.code === 'auth/invalid-email') {
+                    console.log('That email address is invalid!');
+                }
+
+                console.error(error);
+            });
     }
 
     GoogleSignin.configure({
@@ -40,7 +47,6 @@ const Login = ({ navigation }) => {
             dispatch(setUser(user))
             console.log(res)
         }).catch(err => {
-            console.log("errrorrrrrrrrrrrr")
             console.log(err)
         })
     }
@@ -58,8 +64,11 @@ const Login = ({ navigation }) => {
                 </Text>
             </TouchableOpacity>
 
-            <View>
-                <GoogleSigninButton onPress={() => onGoogleButtonPress()} />
+            <View style={{ marginTop: 20 }}>
+                <GoogleSigninButton onPress={() => onGoogleButtonPress()} style={{ width: 192, height: 48 }}
+                    size={GoogleSigninButton.Size.Wide}
+                    color={GoogleSigninButton.Color.Light}
+                />
 
             </View>
 

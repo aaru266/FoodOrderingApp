@@ -5,6 +5,7 @@ import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
 import { FirebaseAuth } from '../firebase'
 import { useDispatch } from 'react-redux'
 import { setUser } from '../app/features/UserSlice'
+import auth from '@react-native-firebase/auth';
 
 const SignUp = ({ navigation }) => {
     const [email, setEmail] = useState('');
@@ -13,16 +14,21 @@ const SignUp = ({ navigation }) => {
     const dispatch = useDispatch()
 
     const handleSignUp = () => {
-        createUserWithEmailAndPassword(FirebaseAuth, email, password)
-            .then((userCredential) => {
-                const user = userCredential.user;
-                dispatch(setUser(user))
-                console.log(user)
+        auth()
+            .createUserWithEmailAndPassword(email, password)
+            .then(() => {
+                console.log('User account created & signed in!');
             })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                alert(errorMessage)
+            .catch(error => {
+                if (error.code === 'auth/email-already-in-use') {
+                    console.log('That email address is already in use!');
+                }
+
+                if (error.code === 'auth/invalid-email') {
+                    console.log('That email address is invalid!');
+                }
+
+                console.error(error.message);
             });
     }
 
